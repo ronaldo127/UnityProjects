@@ -9,11 +9,12 @@ public class EnemyBehaviour : MonoBehaviour {
     public float shotsPerSecond = 0.5f;
 
     private BoxCollider2D myCollider;
+    private ScoreKeeper score;
 
     // Use this for initialization
     void Start () {
         myCollider = this.GetComponent<BoxCollider2D>();
-
+        score = GameObject.FindObjectOfType<ScoreKeeper>();
     }
 	
 	// Update is called once per frame
@@ -38,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour {
             bullet.Hit();
             if (hp <= 0)
             {
+                score.Score(Mathf.FloorToInt(bullet.damage));
                 Destroy(gameObject);
             }
         }
