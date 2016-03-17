@@ -1,23 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MusicPlayer : MonoBehaviour {
+public class MusicPlayer : MonoBehaviour
+{
 
-	private static MusicPlayer instance;
+    public AudioClip menuClip;
+    public AudioClip inGameClip;
 
-	void Awake ()
-	{
-		if (instance == null) {
-			instance = this;
-			GameObject.DontDestroyOnLoad (gameObject);
-		} else {
-			Destroy(gameObject);
-		}
-	}
+    private static MusicPlayer instance;
+    private AudioSource music;
 
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
+            music = GetComponent<AudioSource>();
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        music.Stop();
+        if (level != 1)
+            music.clip = menuClip;
+        else
+            music.clip = inGameClip;
+
+        music.loop = true;
+        music.Play();
+    }
+
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

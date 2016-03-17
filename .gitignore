@@ -2,3 +2,4 @@
 .dwlt,.asset,.mdb,.info,.suo
 */Library/
 *.csproj
+*.meta

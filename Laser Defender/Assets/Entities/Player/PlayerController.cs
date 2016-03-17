@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     private float xMax = 5;
 
     private BoxCollider2D myCollider;
+    public AudioClip playerShot;
+    public AudioClip playerHit;
 
     // Use this for initialization
     void Start () {
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 rightMost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
         xMin = leftMost.x + myCollider.size.x/2;
         xMax = rightMost.x - myCollider.size.x/2;
+        
     }
 	
 	// Update is called once per frame
@@ -39,17 +43,26 @@ public class PlayerController : MonoBehaviour {
         {
             hp -= bullet.damage;
             bullet.Hit();
+            AudioSource.PlayClipAtPoint(playerHit, transform.position);
             if (hp <= 0)
             {
-                Destroy(gameObject);
+                Die();
             }
         }
+    }
+
+    private void Die()
+    {
+        LevelManager lm = GameObject.FindObjectOfType<LevelManager>();
+        lm.LoadLevel("Lose Screen");
+        Destroy(gameObject);
     }
 
     void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab, this.transform.position + Vector3.up * myCollider.size.y, Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().velocity = Vector3.up * bulletSpeed;
+        AudioSource.PlayClipAtPoint(playerShot, transform.position);
     }
 
     void HandleBullet()
