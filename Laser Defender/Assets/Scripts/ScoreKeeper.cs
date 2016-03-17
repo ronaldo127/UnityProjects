@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour {
 
-    private int score = 0;
+    public static int score = 0;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +19,12 @@ public class ScoreKeeper : MonoBehaviour {
 
     public void Score(int points)
     {
-        this.score += points;
-        this.GetComponent<Text>().text = "Score = " + this.score;
+        score += points;
+        this.GetComponent<Text>().text = "Score = " + score;
     }
 
-    public void Reset()
+    public static void Reset()
     {
-        this.score = 0;
-        this.Score(0);
+        score = 0;
     }
 }
