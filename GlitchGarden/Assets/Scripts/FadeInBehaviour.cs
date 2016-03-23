@@ -13,6 +13,7 @@ public class FadeInBehaviour : MonoBehaviour
     {
         image =  this.GetComponent<Image>();
         image.color = Color.white;
+        this.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

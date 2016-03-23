@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MusicPlayer : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefsManager.GetMasterVolume();
+        OnLevelWasLoaded(0);
     }
 
 
@@ -34,12 +37,17 @@ public class MusicPlayer : MonoBehaviour
 
     }
 
+    internal void SetVolume(float value)
+    {
+        audioSource.volume = value;
+    }
+
     public void OnLevelWasLoaded(int level)
     {
         audioSource.Stop();
-        if (level > 0 && level <= musicChangeArray.Length && musicChangeArray[level]!=null) {
+        if (level >= 0 && level <= musicChangeArray.Length && musicChangeArray[level]!=null) {
             audioSource.clip = (musicChangeArray[level]);
-            audioSource.loop = true;
+            audioSource.loop = level>0;
             audioSource.Play();
         }
     }
