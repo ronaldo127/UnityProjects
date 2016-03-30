@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Button : MonoBehaviour {
+public class SpawnButton : MonoBehaviour {
 
 	public GameObject prefab;
 
-	private Button[] buttonsInScene;
+	private SpawnButton[] buttonsInScene;
 	private static GameObject currentSelected;
 
 	// Use this for initialization
 	void Start () {
-		buttonsInScene = GameObject.FindObjectsOfType<Button>();
+		buttonsInScene = GameObject.FindObjectsOfType<SpawnButton>();
 	}
 	
 	// Update is called once per frame
@@ -20,7 +20,7 @@ public class Button : MonoBehaviour {
 
 	void OnMouseDown ()
 	{
-		foreach (Button btn in buttonsInScene) {
+		foreach (SpawnButton btn in buttonsInScene) {
 			changeColor (btn.GetComponentsInChildren<SpriteRenderer> (), Color.black);
 		}
 
@@ -39,7 +39,7 @@ public class Button : MonoBehaviour {
 		}
 	}
 
-	public GameObject GetCurrentSelected ()
+	public static GameObject GetCurrentSelected ()
 	{
 		return currentSelected;
 	}

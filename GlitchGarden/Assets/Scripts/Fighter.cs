@@ -21,7 +21,8 @@ public class Fighter : MonoBehaviour {
 			bool isDead = enemyHealth.LoseHP (damage);
 			animator.SetBool ("isAttacking", !isDead);
 		} else {
-			Debug.LogError (name+ " says: no Target found.");
+			Debug.LogWarning (name + " says: no Target found.");
+			animator.SetBool ("isAttacking", false);
 		}
 	}
 

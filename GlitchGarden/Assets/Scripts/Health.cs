@@ -19,7 +19,7 @@ public class Health : MonoBehaviour {
 		healthPoints -= damage;
 		if(healthPoints<=0){
 			//in case of dead animation
-			DestroyActor ();
+			DestroyActor();
 			return true;
 		}
 		return false;
