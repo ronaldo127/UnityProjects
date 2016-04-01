@@ -5,12 +5,15 @@ public class SpawnButton : MonoBehaviour {
 
 	public GameObject prefab;
 
+	private int cost=100;
 	private SpawnButton[] buttonsInScene;
 	private static GameObject currentSelected;
 
 	// Use this for initialization
 	void Start () {
 		buttonsInScene = GameObject.FindObjectsOfType<SpawnButton>();
+		if (prefab!=null && prefab.GetComponent<Defender>())
+			cost = prefab.GetComponent<Defender>().cost;
 	}
 	
 	// Update is called once per frame

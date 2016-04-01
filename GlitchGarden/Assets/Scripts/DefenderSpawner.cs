@@ -4,17 +4,26 @@ using System.Collections;
 public class DefenderSpawner : MonoBehaviour {
 
 	private GameObject defenders;
+	private StarDisplay starDisplay;
 
 	// Use this for initialization
 	void Start () {
 		defenders = GameObject.Find("Defenders");
 		if (defenders==null)
 			defenders = new GameObject("Defenders");
+		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
 	}
 
 	void OnMouseDown ()
 	{
-		SnapToGrid(GetMouseClickInGrid());
+		if (SpawnButton.GetCurrentSelected ()) {
+			int cost = SpawnButton.GetCurrentSelected ().GetComponent<Defender> ().cost;
+			if (starDisplay.UseStars(cost))
+				SnapToGrid (GetMouseClickInGrid ());
+			else {
+				Debug.Log("no enough money");
+			}
+		}
 	}
 
 	private void SnapToGrid (Vector3 dest)
