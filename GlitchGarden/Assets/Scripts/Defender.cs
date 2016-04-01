@@ -4,5 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Health))]
 public class Defender : MonoBehaviour {
 
-	// Only Tag for naw
+	void OnDrawGizmos(){
+		Gizmos.DrawWireSphere(transform.position, 0.5f);
+	}
 }

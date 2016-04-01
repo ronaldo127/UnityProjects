@@ -4,9 +4,9 @@ using System.Collections;
 public class LaneSpawner : MonoBehaviour {
 
 	[Tooltip("How many seconds until next spawn?")]
-	public float spawnTime;
+	public float spawnTime = 1f;
 	[Tooltip("Enemies to be spawned")]
-	public GameObject[] enemies;
+	public GameObject[] enemiesPrefabs;
 	[Tooltip("How many seconds until we start?")]
 	public float startTime;
 
@@ -15,26 +15,29 @@ public class LaneSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		attackers = GameObject.Find("Attackers");
-		if (attackers == null) attackers = new GameObject("Attackers");
+		SetupAttackersObject();
 		InvokeRepeating("Spawn", startTime, spawnTime);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	private void SetupAttackersObject ()
+	{
+		attackers = GameObject.Find("Attackers");
+		if (attackers == null) attackers = new GameObject("Attackers");
 	}
 
 	void Spawn ()
 	{
-		if (i >= enemies.Length) {
-			Debug.Log("spawning cancelled");
+		if (i >= enemiesPrefabs.Length) {
 			CancelInvoke("Spawn");
 			return;
 		}
-		Debug.Log("spawning");
-		GameObject obj = enemies[i++];
+		GameObject obj = enemiesPrefabs[i++];
 		GameObject attacker = Instantiate(obj, this.transform.position, Quaternion.identity) as GameObject;
 		attacker.transform.parent = attackers.transform;
+	}
+
+	void OnDrawGizmos ()
+	{
+		Gizmos.DrawWireCube(this.transform.position, Vector3.one);
 	}
 }

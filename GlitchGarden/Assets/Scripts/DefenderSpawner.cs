@@ -19,11 +19,23 @@ public class DefenderSpawner : MonoBehaviour {
 
 	private void SnapToGrid (Vector3 dest)
 	{
-		Collider2D[] hitColliders = Physics2D.OverlapCircleAll (dest, 0.4f);
-		if (hitColliders.Length < 2) {
+		if (CanAttach(dest)) {
 			GameObject defender = Instantiate (SpawnButton.GetCurrentSelected (), dest, Quaternion.identity) as GameObject;
 			defender.transform.parent = defenders.transform;
 		}
+	}
+
+	private bool CanAttach (Vector3 dest)
+	{
+		Collider2D[] hitColliders = Physics2D.OverlapCircleAll (dest, 0.5f);
+		int counter = 0;
+		foreach (Collider2D collider in hitColliders) {
+			if (!collider.GetComponent<Projectile>()){
+				counter++;
+			}
+		}
+
+		return counter < 2;
 	}
 
 	private Vector3 GetMouseClickInGrid ()
