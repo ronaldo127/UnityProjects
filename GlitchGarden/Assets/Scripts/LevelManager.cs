@@ -28,4 +28,8 @@ public class LevelManager : MonoBehaviour {
 	public void LoadNextLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
+
+	public void LoadLoseScene(){
+		LoadLevel("03b Lose");
+	}
 }
