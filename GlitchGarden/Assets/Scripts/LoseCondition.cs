@@ -16,7 +16,7 @@ public class LoseCondition : Shredder {
 	
 	}
 
-	void OnTriggerEnter2D (Collider2D collider)
+	new public void OnTriggerEnter2D (Collider2D collider)
 	{
 		if (collider.GetComponent<Attacker> ())
 			enemiesCanPass--;

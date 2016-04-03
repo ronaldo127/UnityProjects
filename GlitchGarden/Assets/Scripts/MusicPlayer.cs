@@ -51,4 +51,14 @@ public class MusicPlayer : MonoBehaviour
             audioSource.Play();
         }
     }
+
+    public void PlayAudio (AudioClip audio)
+	{
+		if (audio) {
+			audioSource.PlayOneShot (audio);
+		}
+    }
+
+
+
 }

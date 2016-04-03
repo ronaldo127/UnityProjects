@@ -9,11 +9,12 @@ public class StarTrophy : MonoBehaviour {
 
 	void Start(){
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+		if (!starDisplay) Debug.LogWarning("No StarDisplay on scene!");
 	}
 
 	public void AddStars ()
 	{
-		starDisplay.AddStars(starsPoints);
+		if (starDisplay) starDisplay.AddStars(starsPoints);
 	}
 
 }
