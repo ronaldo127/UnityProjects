@@ -21,7 +21,7 @@ public class DefenderSpawner : MonoBehaviour {
 			if (starDisplay.UseStars(cost))
 				SnapToGrid (GetMouseClickInGrid ());
 			else {
-				Debug.Log("no enough money");
+				SpawnButton.CantSpawnMessage();
 			}
 		}
 	}

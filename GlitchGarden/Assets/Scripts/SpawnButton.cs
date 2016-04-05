@@ -2,18 +2,24 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
+[RequireComponent(typeof(Animator))]
 public class SpawnButton : MonoBehaviour {
 
 	public GameObject prefab;
 
-	private SpawnButton[] buttonsInScene;
 	private static GameObject currentSelected;
+	private static Animator currentSelectedAnimator;
+
+	private SpawnButton[] buttonsInScene;
 	private Text costText;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		buttonsInScene = GameObject.FindObjectsOfType<SpawnButton>();
 		FindCostText ();
+		animator = GetComponent<Animator>();
 	}
 
 	void FindCostText ()
@@ -38,10 +44,12 @@ public class SpawnButton : MonoBehaviour {
 
 		if (this.prefab.Equals (currentSelected)) {
 			currentSelected = null;
+			currentSelectedAnimator = null;
 		} else {
 			SpriteRenderer[] pressedSprites = this.GetComponentsInChildren<SpriteRenderer>();
 			changeColor(pressedSprites, Color.white);
 			currentSelected = this.prefab;
+			currentSelectedAnimator = this.animator;
 		}
 	}
 
@@ -54,5 +62,11 @@ public class SpawnButton : MonoBehaviour {
 	public static GameObject GetCurrentSelected ()
 	{
 		return currentSelected;
+	}
+
+	public static void CantSpawnMessage ()
+	{
+		if (currentSelectedAnimator)
+			currentSelectedAnimator.SetTrigger("Blink");
 	}
 }
