@@ -45,10 +45,23 @@ public class GameTimer : MonoBehaviour {
 	}
 	private void Win ()
 	{
+		DestroyActors();
 		hasWon=true;
 		if (winText) winText.SetActive(true);
 		if (musicPlayer) musicPlayer.PlayAudio(winSound);
 		Invoke("LoadNextLevel", winSound.length);
+	}
+
+	private void DestroyActors ()
+	{
+		GameObject[] attackers = GameObject.FindGameObjectsWithTag ("Attacker");
+		GameObject[] defenders = GameObject.FindGameObjectsWithTag ("Defender");
+		foreach (GameObject aux in attackers) {
+			Destroy(aux);
+		}
+		foreach (GameObject aux in defenders) {
+			Destroy(aux);
+		}
 	}
 
 	private void LoadNextLevel ()
