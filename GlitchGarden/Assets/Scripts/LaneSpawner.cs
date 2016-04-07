@@ -28,12 +28,15 @@ public class LaneSpawner : MonoBehaviour {
 	void Spawn ()
 	{
 		if (i >= enemiesPrefabs.Length) {
-			CancelInvoke("Spawn");
+			CancelInvoke ("Spawn");
 			return;
 		}
-		GameObject obj = enemiesPrefabs[i++];
-		GameObject attacker = Instantiate(obj, this.transform.position, Quaternion.identity) as GameObject;
-		attacker.transform.parent = attackers.transform;
+		GameObject obj = enemiesPrefabs [i];
+		if (obj) {
+			GameObject attacker = Instantiate (obj, this.transform.position, Quaternion.identity) as GameObject;
+			attacker.transform.parent = attackers.transform;
+		}
+		if (enemiesPrefabs.Length<=++i) i=0;
 	}
 
 	void OnDrawGizmos ()

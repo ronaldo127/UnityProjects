@@ -18,20 +18,21 @@ public class DefenderSpawner : MonoBehaviour {
 	{
 		if (SpawnButton.GetCurrentSelected ()) {
 			int cost = SpawnButton.GetCurrentSelected ().GetComponent<Defender> ().cost;
-			if (starDisplay.UseStars(cost))
-				SnapToGrid (GetMouseClickInGrid ());
-			else {
-				SpawnButton.CantSpawnMessage();
+			Vector3 dest = GetMouseClickInGrid ();
+			if (CanAttach (dest)) {
+				if (starDisplay.UseStars (cost)) {
+					SnapToGrid (dest);
+				} else {
+					SpawnButton.CantSpawnMessage ();
+				}
 			}
 		}
 	}
 
 	private void SnapToGrid (Vector3 dest)
 	{
-		if (CanAttach(dest)) {
-			GameObject defender = Instantiate (SpawnButton.GetCurrentSelected (), dest, Quaternion.identity) as GameObject;
-			defender.transform.parent = defenders.transform;
-		}
+		GameObject defender = Instantiate (SpawnButton.GetCurrentSelected (), dest, Quaternion.identity) as GameObject;
+		defender.transform.parent = defenders.transform;
 	}
 
 	private bool CanAttach (Vector3 dest)
