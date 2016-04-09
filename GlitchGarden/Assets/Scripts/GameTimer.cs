@@ -9,7 +9,6 @@ public class GameTimer : MonoBehaviour {
 	public AudioClip winSound;
 	public LevelManager levelManager;
 
-	private MusicPlayer musicPlayer;
 	private float currentTime = 0.0f;
 	private Slider slider;
 	private bool hasWon;
@@ -18,9 +17,6 @@ public class GameTimer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		slider = GetComponent<Slider>();
-		musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
-		if (!musicPlayer)
-			Debug.LogWarning ("There is no MusicPlayer in Scene, so load SplashScreen first.");
 		FindWinLabel ();
 		hasWon = false;
 	}
@@ -48,7 +44,7 @@ public class GameTimer : MonoBehaviour {
 		DestroyActors();
 		hasWon=true;
 		if (winText) winText.SetActive(true);
-		if (musicPlayer) musicPlayer.PlayAudio(winSound);
+		MusicPlayer.PlayAudio(winSound);
 		Invoke("LoadNextLevel", winSound.length);
 	}
 
