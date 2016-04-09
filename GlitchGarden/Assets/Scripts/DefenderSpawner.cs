@@ -37,7 +37,7 @@ public class DefenderSpawner : MonoBehaviour {
 
 	private bool CanAttach (Vector3 dest)
 	{
-		Collider2D[] hitColliders = Physics2D.OverlapCircleAll (dest, 0.5f);
+		Collider2D[] hitColliders = Physics2D.OverlapCircleAll (dest, 0.4f);
 		int counter = 0;
 		foreach (Collider2D collider in hitColliders) {
 			if (!collider.GetComponent<Projectile>()){

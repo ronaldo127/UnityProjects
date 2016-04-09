@@ -11,7 +11,6 @@ public class GraveStone : MonoBehaviour {
 
 	void OnTriggerStay2D (Collider2D collider)
 	{
-		print("Stayed!");
 		if (!collider.CompareTag(gameObject.tag)){
 			animator.SetTrigger("isAttacked");
 		}
