@@ -44,7 +44,6 @@ public class DefenderSpawner : MonoBehaviour {
 				counter++;
 			}
 		}
-
 		return counter < 2;
 	}
 
