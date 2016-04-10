@@ -8,6 +8,10 @@ public class SpawnButton : MonoBehaviour {
 
 	public GameObject prefab;
 
+	public bool autoClick=false;
+	public AudioClip noMoneySound;
+	public static AudioClip staticSound;
+
 	private static GameObject currentSelected;
 	private static Animator currentSelectedAnimator;
 
@@ -20,6 +24,9 @@ public class SpawnButton : MonoBehaviour {
 		buttonsInScene = GameObject.FindObjectsOfType<SpawnButton>();
 		FindCostText ();
 		animator = GetComponent<Animator>();
+		if(autoClick) OnMouseDown();
+		if (noMoneySound)
+			staticSound = noMoneySound;
 	}
 
 	void FindCostText ()
@@ -42,10 +49,10 @@ public class SpawnButton : MonoBehaviour {
 			changeColor (btn.GetComponentsInChildren<SpriteRenderer> (), Color.black);
 		}
 
-		if (this.prefab.Equals (currentSelected)) {
+		/*if (this.prefab.Equals (currentSelected)) {
 			currentSelected = null;
 			currentSelectedAnimator = null;
-		} else {
+		} else*/ {
 			SpriteRenderer[] pressedSprites = this.GetComponentsInChildren<SpriteRenderer>();
 			changeColor(pressedSprites, Color.white);
 			currentSelected = this.prefab;
@@ -66,7 +73,9 @@ public class SpawnButton : MonoBehaviour {
 
 	public static void CantSpawnMessage ()
 	{
-		if (currentSelectedAnimator)
-			currentSelectedAnimator.SetTrigger("Blink");
+		if (currentSelectedAnimator) {
+			currentSelectedAnimator.SetTrigger ("Blink");
+			MusicPlayer.PlayAudio(staticSound);
+		}
 	}
 }

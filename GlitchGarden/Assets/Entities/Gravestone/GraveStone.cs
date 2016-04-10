@@ -9,16 +9,10 @@ public class GraveStone : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter2D (Collider2D collider)
+	void OnTriggerStay2D (Collider2D collider)
 	{
 		if (!collider.CompareTag(gameObject.tag)){
-			animator.SetBool("isAttacked", true);
-		}
-	}
-	void OnTriggerExit2D (Collider2D collider)
-	{
-		if (!collider.CompareTag(gameObject.tag)){
-			animator.SetBool("isAttacked", false);
+			animator.SetTrigger("isAttacked");
 		}
 	}
 }

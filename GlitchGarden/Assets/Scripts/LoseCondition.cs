@@ -5,6 +5,7 @@ public class LoseCondition : Shredder {
 
 	[Tooltip("Configure here the amount of enemies that will make the player lose.")]
 	public int enemiesCanPass;
+	public bool canLose = true;
 
 	public LevelManager levelManager;
 	// Use this for initialization
@@ -18,10 +19,12 @@ public class LoseCondition : Shredder {
 
 	new public void OnTriggerEnter2D (Collider2D collider)
 	{
-		if (collider.GetComponent<Attacker> ())
-			enemiesCanPass--;
-		if (enemiesCanPass <= 0) {
-			levelManager.LoadLoseScene();
+		if (canLose) {
+			if (collider.GetComponent<Attacker> ())
+				enemiesCanPass--;
+			if (enemiesCanPass <= 0) {
+				levelManager.LoadLoseScene ();
+			}
 		}
 		base.OnTriggerEnter2D(collider);
 	}

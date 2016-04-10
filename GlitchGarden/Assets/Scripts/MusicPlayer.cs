@@ -50,15 +50,28 @@ public class MusicPlayer : MonoBehaviour
             audioSource.loop = level>0;
             audioSource.Play();
         }
-    }
+	}
 
-    public void PlayAudio (AudioClip audio)
+	public void PlayOneShot (AudioClip audio)
 	{
 		if (audio) {
 			audioSource.PlayOneShot (audio);
 		}
+	}
+
+    public static void PlayAudio (AudioClip audio)
+	{
+		if (instance) {
+			if (audio) {
+				instance.PlayOneShot (audio);
+			}
+		} else {
+			LogWarningNotFound();
+		}
     }
 
 
-
+    public static void LogWarningNotFound(){
+		Debug.LogWarning ("There is no MusicPlayer in Scene, so load SplashScreen first.");
+    }
 }

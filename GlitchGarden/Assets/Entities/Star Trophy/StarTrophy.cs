@@ -4,6 +4,7 @@ using System.Collections;
 public class StarTrophy : MonoBehaviour {
 
 	public int starsPoints;
+	public AudioClip coinSound;
 
 	private StarDisplay starDisplay;
 
@@ -14,7 +15,10 @@ public class StarTrophy : MonoBehaviour {
 
 	public void AddStars ()
 	{
-		if (starDisplay) starDisplay.AddStars(starsPoints);
+		if (starDisplay) {
+			MusicPlayer.PlayAudio(coinSound);
+			starDisplay.AddStars (starsPoints);
+		}
 	}
 
 }
