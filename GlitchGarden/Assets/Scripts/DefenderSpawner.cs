@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DefenderSpawner : MonoBehaviour {
 
+	public float maxX = 9.0f;
+	public float maxY = 5.0f;
+
 	private GameObject defenders;
 	private StarDisplay starDisplay;
 
@@ -50,8 +53,10 @@ public class DefenderSpawner : MonoBehaviour {
 	private Vector3 GetMouseClickInGrid ()
 	{
 		Vector3 temp = Input.mousePosition;
-		temp.z = 10;
+		temp.z = transform.position.z-Camera.main.transform.position.z;
 		temp = Camera.main.ScreenToWorldPoint(temp);
-		return new Vector3(Mathf.Round(temp.x), Mathf.Round(temp.y), 0);
+		return new Vector3(Mathf.Clamp(Mathf.Round(temp.x), 1.0f, maxX),
+							Mathf.Clamp(Mathf.Round(temp.y), 1.0f, maxY),
+							 0);
 	}
 }
