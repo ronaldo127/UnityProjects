@@ -49,15 +49,10 @@ public class SpawnButton : MonoBehaviour {
 			changeColor (btn.GetComponentsInChildren<SpriteRenderer> (), Color.black);
 		}
 
-		/*if (this.prefab.Equals (currentSelected)) {
-			currentSelected = null;
-			currentSelectedAnimator = null;
-		} else*/ {
-			SpriteRenderer[] pressedSprites = this.GetComponentsInChildren<SpriteRenderer>();
-			changeColor(pressedSprites, Color.white);
-			currentSelected = this.prefab;
-			currentSelectedAnimator = this.animator;
-		}
+		SpriteRenderer[] pressedSprites = this.GetComponentsInChildren<SpriteRenderer>();
+		changeColor(pressedSprites, Color.white);
+		currentSelected = this.prefab;
+		currentSelectedAnimator = this.animator;
 	}
 
 	private void changeColor(SpriteRenderer[] spriteRenderes, Color color){
