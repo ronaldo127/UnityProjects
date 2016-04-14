@@ -11,18 +11,20 @@ public class Ball : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SetupVariables ();
-		Launch ();
 	}
 
 	void SetupVariables ()
 	{
 		rigidBody = GetComponent<Rigidbody> ();
 		rollingSound = GetComponent<AudioSource> ();
+
+		rigidBody.useGravity = false;
 	}
 
-	public void Launch ()
+	public void Launch (Vector3 velocity)
 	{
-		rigidBody.velocity = ( Vector3.forward * initialVelocity);
+		rigidBody.useGravity = true;
+		rigidBody.velocity = (velocity);
 		rollingSound.Play ();
 	}
 	
