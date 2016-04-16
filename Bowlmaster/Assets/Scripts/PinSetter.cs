@@ -25,7 +25,8 @@ public class PinSetter : MonoBehaviour {
 	{
 		standingText.text = CountStanding ().ToString ();
 		if (ballEnteredBox) {
-			UpdateStandingCountAndSettle();
+			UpdateStandingCount();
+			UpdatePinSettled();
 		}
 	}
 
@@ -51,17 +52,16 @@ public class PinSetter : MonoBehaviour {
 		Instantiate(pinSet, pinSet.transform.position, Quaternion.identity);
 	}
 
-	void UpdateStandingCountAndSettle ()
+	void UpdateStandingCount ()
 	{
 		int currentStanding = CountStanding ();
 		if (lastStandingCount != currentStanding) {
 			lastStandingCount = currentStanding;
 			lastChangeTime = Time.time;
 		}
-			PinHaveSettled();
 	}
 
-	void PinHaveSettled ()
+	void UpdatePinSettled ()
 	{
 		if (Time.time - lastChangeTime >= 3.0f) {
 			ball.Reset();
@@ -97,13 +97,6 @@ public class PinSetter : MonoBehaviour {
 			float max = 0xff;
 			standingText.color = new Color(r/max, g/max, b/max);
 			ballEnteredBox = true;
-		}
-	}
-	void OnTriggerExit (Collider collider)
-	{
-		Pin pin = collider.GetComponentInParent<Pin>();
-		if (pin) {
-			Destroy(pin);
 		}
 	}
 
