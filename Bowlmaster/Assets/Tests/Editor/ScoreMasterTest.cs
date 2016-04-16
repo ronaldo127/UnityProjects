@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-//using NUnit.Framework;
-using UnityEngine;
-using System.Linq;
+﻿using UnityEngine;
+using UnityEditor;
+using NUnit.Framework;
 
-//[TestFixture]
+[TestFixture]
 public class ScoreMasterTest {
-	
-/*	[Test]
+	[Test]
 	public void T00PassingTest () {
 		Assert.AreEqual (1, 1);
 	}
 
-	[Test]
+	/*[Test]
 	public void T01Bowl23 () {
 		int[] rolls = {2,3};
 		int[] frames = { 5};
 		Assert.AreEqual (frames.ToList(), ScoreMaster.ScoreFrames (rolls.ToList()));
-	}
+	}*/
 //
 //	[Test]
 //	public void T02Bowl234 () {
@@ -212,5 +209,4 @@ public class ScoreMasterTest {
 //		int[] totalS = {30, 60, 89,108, 117,147,177,207,236,    256};
 //		Assert.AreEqual (totalS.ToList(), ScoreMaster.ScoreCumulative (rolls.ToList()));
 //	}
-*/
 }
