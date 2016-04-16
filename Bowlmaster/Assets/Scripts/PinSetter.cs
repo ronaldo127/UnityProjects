@@ -7,6 +7,7 @@ public class PinSetter : MonoBehaviour {
 	public int lastStandingCount = -1;
 	public Text standingText;
 	public float distanceToRaise = 40.0f;
+	public GameObject pinSet;
 
 	private Ball ball;
 	private float lastChangeTime;
@@ -24,7 +25,7 @@ public class PinSetter : MonoBehaviour {
 	{
 		standingText.text = CountStanding ().ToString ();
 		if (ballEnteredBox) {
-			CheckStanding();
+			UpdateStandingCountAndSettle();
 		}
 	}
 
@@ -47,31 +48,32 @@ public class PinSetter : MonoBehaviour {
 	public void RenewPins ()
 	{
 		print("RenewPins!");
+		Instantiate(pinSet, pinSet.transform.position, Quaternion.identity);
 	}
 
-	void CheckStanding ()
+	void UpdateStandingCountAndSettle ()
 	{
 		int currentStanding = CountStanding ();
 		if (lastStandingCount != currentStanding) {
 			lastStandingCount = currentStanding;
 			lastChangeTime = Time.time;
 		}
-		if (Time.time - lastChangeTime >= 3.0f) {
 			PinHaveSettled();
-		}
 	}
 
 	void PinHaveSettled ()
 	{
-		ball.Reset();
-		lastStandingCount=-1;
-		ballEnteredBox=false;
+		if (Time.time - lastChangeTime >= 3.0f) {
+			ball.Reset();
+			lastStandingCount=-1;
+			ballEnteredBox=false;
 
-		float r = 0x4c;
-		float g = 0xaf;
-		float b = 0x50;
-		float max = 0xff;
-		standingText.color = new Color(r/max, g/max, b/max);
+			float r = 0x4c;
+			float g = 0xaf;
+			float b = 0x50;
+			float max = 0xff;
+			standingText.color = new Color(r/max, g/max, b/max);
+		}
 	}
 
 	public int CountStanding ()

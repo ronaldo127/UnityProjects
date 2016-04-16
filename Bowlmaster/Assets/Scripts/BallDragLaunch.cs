@@ -2,10 +2,9 @@
 using System.Collections;
 
 [RequireComponent(typeof(Ball))]
-public class DragLaunch : MonoBehaviour {
+public class BallDragLaunch : MonoBehaviour {
 
-	public Ball ball;
-
+	private Ball ball;
 	private float dragStartTime;
 	private Vector3 dragStartMousePosition;
 	private GameObject floor;
