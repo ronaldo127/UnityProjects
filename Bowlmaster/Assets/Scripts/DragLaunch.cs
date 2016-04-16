@@ -8,7 +8,6 @@ public class DragLaunch : MonoBehaviour {
 
 	private float dragStartTime;
 	private Vector3 dragStartMousePosition;
-	private bool isLaunched = false;
 	private GameObject floor;
 
 	void Start () {
@@ -18,14 +17,14 @@ public class DragLaunch : MonoBehaviour {
 	}
 
 	public void DragStart(){
-		if (isLaunched) return;
+		if (ball.inPlay) return;
 
 		dragStartTime = Time.timeSinceLevelLoad;
 		dragStartMousePosition = Input.mousePosition;
 	}
 
 	public void DragEnd () {
-		if (isLaunched) return;
+		if (ball.inPlay) return;
 
 		Vector3 diffPosition = Input.mousePosition - dragStartMousePosition;
 		float diffTime = Time.timeSinceLevelLoad - dragStartTime;
@@ -34,12 +33,11 @@ public class DragLaunch : MonoBehaviour {
 		Vector3 launchVector = new Vector3(diffPosition.x, 0, Mathf.Clamp(diffPosition.y/diffTime, 0, floorDistance));
 		ball.Launch(launchVector);
 
-		isLaunched = true;
 	}
 
 	public void MoveStart (float x)
 	{
-		if (isLaunched) return;
+		if (ball.inPlay) return;
 
 		float radius = this.transform.lossyScale.x/2;
 		float minX = floor.transform.position.x-floor.transform.lossyScale.x/2+radius;
