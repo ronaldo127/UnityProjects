@@ -6,24 +6,47 @@ public class PinSetter : MonoBehaviour {
 
 	public int lastStandingCount = -1;
 	public Text standingText;
+	public float distanceToRaise = 40.0f;
 
 	private Ball ball;
 	private float lastChangeTime;
 	private bool ballEnteredBox = false;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		ball = GameObject.FindObjectOfType<Ball>();
+		animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		standingText.text = CountStanding ().ToString ();
-
 		if (ballEnteredBox) {
 			CheckStanding();
 		}
+	}
+
+	public void RaisePins()
+	{
+		Pin[] pins = GameObject.FindObjectsOfType<Pin>();
+		foreach (Pin pin in pins) {
+			pin.Raise(distanceToRaise);
+		}
+	}
+
+	public void LowerPins ()
+	{
+		Pin[] pins = GameObject.FindObjectsOfType<Pin>();
+		foreach (Pin pin in pins) {
+			pin.Lower(distanceToRaise);
+		}
+	}
+
+	public void RenewPins ()
+	{
+		print("RenewPins!");
 	}
 
 	void CheckStanding ()
@@ -80,5 +103,14 @@ public class PinSetter : MonoBehaviour {
 		if (pin) {
 			Destroy(pin);
 		}
+	}
+
+	public void Reset ()
+	{
+		animator.SetTrigger("resetTrigger");
+	}
+	public void Tidy()
+	{
+		animator.SetTrigger("tidyTrigger");
 	}
 }
