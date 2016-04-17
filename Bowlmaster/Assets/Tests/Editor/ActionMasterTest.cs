@@ -17,6 +17,31 @@ public class ActionMasterTest {
 		actionMaster = new ActionMaster ();
 	}
 
+
+	[Test]
+	public void T001OneStrikeReturnsEndTurn ()
+	{
+		Assert.AreEqual(ActionMaster.Action.END_TURN, actionMaster.Bowl(10));
+	}
+
+	[Test]
+	public void T002BowlLessThan10ReturnTidy ()
+	{
+		for (int i = 0; i < 10; i++) {
+			actionMaster = new ActionMaster ();
+			Assert.AreEqual (ActionMaster.Action.TIDY, actionMaster.Bowl (i));
+		}
+	}
+	[Test]
+	public void T003BowlTwiceReturnEndTurn ()
+	{
+		for (int i = 0; i < 10; i++) {
+			actionMaster = new ActionMaster ();
+			Assert.AreEqual (ActionMaster.Action.TIDY, actionMaster.Bowl (i));
+			Assert.AreEqual (ActionMaster.Action.END_TURN, actionMaster.Bowl (i));
+		}
+	}
+
 	[Test]
 	public void T00PassingTest () {
 		Assert.AreEqual (1, 1);
@@ -81,7 +106,7 @@ public class ActionMasterTest {
 			Assert.AreNotEqual(endGame, actionMaster.Bowl (1));
 		}
 		Assert.AreEqual (reset, actionMaster.Bowl (10));
-		Assert.AreEqual (reset, actionMaster.Bowl (1));
+		Assert.AreEqual (tidy, actionMaster.Bowl (1));
 		Assert.AreEqual (endGame, actionMaster.Bowl (1));
 	}
 
@@ -91,31 +116,44 @@ public class ActionMasterTest {
 			Assert.AreNotEqual(endGame, actionMaster.Bowl (10));
 		}
 		Assert.AreEqual (reset, actionMaster.Bowl (10));
-		Assert.AreEqual (reset, actionMaster.Bowl (1));
+		Assert.AreEqual (tidy, actionMaster.Bowl (1));
 		Assert.AreEqual (endGame, actionMaster.Bowl (1));
 	}
 
 	[Test]
-	public void T001OneStrikeReturnsEndTurn ()
-	{
-		Assert.AreEqual(ActionMaster.Action.END_TURN, actionMaster.Bowl(10));
+	public void T10NStrikeOn19FollowedBy0 () {
+		for(int i = 0;i<18;i++){
+			Assert.AreNotEqual(endGame, actionMaster.Bowl (1));
+		}
+		Assert.AreEqual (reset, actionMaster.Bowl (10));
+		Assert.AreEqual (tidy, actionMaster.Bowl (0));
+		Assert.AreEqual (endGame, actionMaster.Bowl (1));
 	}
 
 	[Test]
-	public void T002BowlLessThan10ReturnTidy ()
+	public void T11Case0and10isEndTurnNoStrikeOrSpareAfterwards () {
+		Assert.AreEqual (tidy, actionMaster.Bowl (0));
+		Assert.AreEqual (endTurn, actionMaster.Bowl (10));
+		Assert.AreEqual (tidy, actionMaster.Bowl (0));
+	}
+
+	[Test]
+	public void T12T11until19Frames ()
 	{
-		for (int i = 0; i < 10; i++) {
-			actionMaster = new ActionMaster ();
-			Assert.AreEqual (ActionMaster.Action.TIDY, actionMaster.Bowl (i));
+		for (int i = 0; i<8; i++) {
+			Assert.AreEqual (tidy, actionMaster.Bowl (0));
+			Assert.AreEqual (endTurn, actionMaster.Bowl (10));			
 		}
 	}
+
 	[Test]
-	public void T003BowlTwiceReturnEndTurn ()
-	{
-		for (int i = 0; i < 10; i++) {
-			actionMaster = new ActionMaster ();
-			Assert.AreEqual (ActionMaster.Action.TIDY, actionMaster.Bowl (i));
-			Assert.AreEqual (ActionMaster.Action.END_TURN, actionMaster.Bowl (i));
+	public void Dondi10thFrameTurkey () {
+		int[] rolls = {1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1};
+		foreach (int roll in rolls) {
+			actionMaster.Bowl (roll);
 		}
+		Assert.AreEqual (reset, actionMaster.Bowl (10));
+		Assert.AreEqual (reset, actionMaster.Bowl (10));
+		Assert.AreEqual (endGame, actionMaster.Bowl (10));
 	}
 }

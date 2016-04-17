@@ -87,6 +87,11 @@ public class PinSetter : MonoBehaviour {
 		return count;
 	}
 
+	public int CountFallen ()
+	{
+		return 10-CountStanding();
+	}
+
 	void OnTriggerEnter (Collider collider)
 	{
 		Ball ball = collider.GetComponent<Ball>();
