@@ -76,6 +76,26 @@ public class ActionMasterTest {
 	}
 
 	[Test]
+	public void T09GameEndsAtBowl21 () {
+		for(int i = 0;i<18;i++){
+			Assert.AreNotEqual(endGame, actionMaster.Bowl (1));
+		}
+		Assert.AreEqual (reset, actionMaster.Bowl (10));
+		Assert.AreEqual (reset, actionMaster.Bowl (1));
+		Assert.AreEqual (endGame, actionMaster.Bowl (1));
+	}
+
+	[Test]
+	public void T09NineStrikesGameEndsAtBowl21 () {
+		for(int i = 0;i<9;i++){
+			Assert.AreNotEqual(endGame, actionMaster.Bowl (10));
+		}
+		Assert.AreEqual (reset, actionMaster.Bowl (10));
+		Assert.AreEqual (reset, actionMaster.Bowl (1));
+		Assert.AreEqual (endGame, actionMaster.Bowl (1));
+	}
+
+	[Test]
 	public void T001OneStrikeReturnsEndTurn ()
 	{
 		Assert.AreEqual(ActionMaster.Action.END_TURN, actionMaster.Bowl(10));
