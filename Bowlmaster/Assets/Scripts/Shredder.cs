@@ -7,7 +7,7 @@ public class Shredder : MonoBehaviour {
 	{
 		Pin pin = collider.GetComponentInParent<Pin>();
 		if (pin) {
-			Destroy(pin);
+			Destroy(pin.gameObject);
 		}
 	}
 

@@ -3,17 +3,17 @@ using System.Collections;
 
 public class PlayBox : MonoBehaviour {
 
-	private PinSetter pinSetter;
+	private PinCounter pinCounter;
 
 	// Use this for initialization
 	void Start () {
-		pinSetter = GameObject.FindObjectOfType<PinSetter>();
+		pinCounter = GameObject.FindObjectOfType<PinCounter>();
 	}
 
 	void OnTriggerExit (Collider col)
 	{
 		if (col.GetComponent<Ball> ()) {
-			pinSetter.BallLeftBox();
+			pinCounter.BallLeftBox();
 		}
 	}
 }

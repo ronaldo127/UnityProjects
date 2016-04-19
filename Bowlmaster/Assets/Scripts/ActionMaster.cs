@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ActionMaster {
 
@@ -11,7 +12,7 @@ public class ActionMaster {
 	private int[] bowls = new int[23];
 	private int bowl = 1;
 
-	public Action Bowl (int pins)
+	private Action Bowl (int pins)
 	{
 		if (pins < 0 || pins > 10)
 			throw new UnityException ("Invalid pins count");
@@ -65,5 +66,14 @@ public class ActionMaster {
 	private bool IsSpare ()
 	{
 		return (bowl%2==0&&bowl<19)||(bowls[bowl]+bowls[bowl-1] == 10&&bowls[bowl]!=10&&bowls[bowl-1]!=10);
+	}
+
+	public static Action NextAction (IList<int> pinFalls)
+	{
+		ActionMaster actionMaster = new ActionMaster();
+		Action currentAction = new Action();
+		foreach(int pins in pinFalls)
+			currentAction = actionMaster.Bowl(pins);
+		return currentAction;
 	}
 }
