@@ -9,12 +9,10 @@ public class PinSetter : MonoBehaviour {
 
 
 	private Animator animator;
-	private ActionMaster player1;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
-		player1 = new ActionMaster();
 	}
 
 

@@ -13,11 +13,9 @@ public class PinCounter : MonoBehaviour {
 	private int lastStandingCount = -1;
 
 	private GameManager gameManager;
-	private Ball ball;
 
 
 	void Start () {
-		ball = GameObject.FindObjectOfType<Ball>();
 		gameManager = GameObject.FindObjectOfType<GameManager>();
 	}
 

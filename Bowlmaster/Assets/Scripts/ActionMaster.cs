@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class ActionMaster {
 
+	private ActionMaster(){}
+
 	public enum Action
 	{
 		TIDY, RESET, END_TURN, END_GAME
