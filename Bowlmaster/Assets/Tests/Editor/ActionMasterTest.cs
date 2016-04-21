@@ -40,8 +40,8 @@ public class ActionMasterTest {
 	{
 		IList<int> input = new List<int>();
 		for (int i = 0; i < 10; i++) {
-			input.Add(i);
-			input.Add(i);
+			input.Add(1);
+			input.Add(1);
 		}
 		Assert.AreEqual (ActionMaster.Action.END_GAME, ActionMaster.NextAction(input));
 	}

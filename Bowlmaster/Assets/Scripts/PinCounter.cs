@@ -11,13 +11,12 @@ public class PinCounter : MonoBehaviour {
 	private bool ballLeftBox = false;
 	private float lastChangeTime;
 	private int lastStandingCount = -1;
+	private int lastSettledCount = 10;
 
 	private GameManager gameManager;
-	private Ball ball;
 
 
 	void Start () {
-		ball = GameObject.FindObjectOfType<Ball>();
 		gameManager = GameObject.FindObjectOfType<GameManager>();
 	}
 
@@ -43,11 +42,13 @@ public class PinCounter : MonoBehaviour {
 	void UpdatePinSettled ()
 	{
 		if (Time.time - lastChangeTime >= 3.0f) {
-			gameManager.Bowl(CountFallen());
+			int standing = CountStanding ();
+			int pinFall = lastSettledCount - standing;
+			lastSettledCount = standing;
+			gameManager.Bowl(pinFall);
 
 			lastStandingCount = -1;
 			ballLeftBox = false;
-
 			float r = 0x4c;
 			float g = 0xaf;
 			float b = 0x50;
@@ -83,5 +84,9 @@ public class PinCounter : MonoBehaviour {
 		float max = 0xff;
 		standingText.color = new Color(r/max, g/max, b/max);
 		ballLeftBox = true;
+	}
+
+	public void Reset () {
+		lastSettledCount = 10;
 	}
 }
