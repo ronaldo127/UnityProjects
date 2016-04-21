@@ -173,7 +173,14 @@ public class ScoreDisplayTest {
 	[Test]
 	public void TG05GoldenCopyC2of3 () {
 		int[] rolls = { 10, 10, 10, 10, 9,0, 10, 10, 10, 10, 10,9,1};
-		string rollsString = "X X X X 9-X X X X X91";
+		string rollsString = "X X X X 9-X X X X X9/";
 		Assert.AreEqual (rollsString, ScoreDisplay.FormatRolls(rolls.ToList()));
+	}
+    [Test]
+    public void T11Bowl010()
+    {
+		int[] rolls = {0,10};
+		string rollString = "-/";
+        Assert.AreEqual(rollString, ScoreDisplay.FormatRolls(rolls.ToList()));
 	}
 }

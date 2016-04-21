@@ -61,7 +61,7 @@ public class ScoreDisplay : MonoBehaviour {
 	{
 		string output = "";
 		for (int i = 0; i < rolls.Count; i++) {
-			if (i > 0 && rolls [i] + rolls [i -1] == 10 && output.Length%2==1) { //is spare
+			if (i > 0 && rolls [i] + rolls [i -1] == 10 && (output.Length%2==1||(output.Length>19&&output[output.Length-1].ToString()!="/"))) { //is spare
 				output += "/";
 			} else if (rolls [i]==0){
 				output += "-";
