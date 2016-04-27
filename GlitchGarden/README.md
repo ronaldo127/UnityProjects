@@ -1,9 +1,5 @@
 #TODO
 
-Dizer o level atual
-
-Diminuir o dano do cacto
-
 Pause
 
 Level Select
