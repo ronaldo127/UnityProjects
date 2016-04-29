@@ -2,6 +2,8 @@
 using System.Collections;
 using System;
 
+delegate void Method(); 
+
 public class MusicPlayer : MonoBehaviour
 {
 
@@ -10,6 +12,10 @@ public class MusicPlayer : MonoBehaviour
     public AudioClip[] musicChangeArray;
 
     private AudioSource audioSource;
+
+	private MusicPlayer ()
+	{
+	}
 
     void Awake()
     {
@@ -28,13 +34,6 @@ public class MusicPlayer : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefsManager.GetMasterVolume();
         OnLevelWasLoaded(0);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     internal void SetVolume(float value)
@@ -59,17 +58,40 @@ public class MusicPlayer : MonoBehaviour
 		}
 	}
 
+	public static void Pause ()
+	{
+		Method m = delegate (){
+			instance.audioSource.Pause();
+		};
+		LogWrapper(m);
+	}
+	public static void Resume ()
+	{
+		Method m = delegate (){
+			instance.audioSource.UnPause();
+		};
+		LogWrapper(m);
+	}
+
+
+
     public static void PlayAudio (AudioClip audio)
 	{
-		if (instance) {
+		Method m = delegate (){
 			if (audio) {
 				instance.PlayOneShot (audio);
 			}
+		};
+		LogWrapper(m);
+    }
+
+	private static void LogWrapper(Method m){//this technique avoids repetition
+		if (instance) {
+			m();
 		} else {
 			LogWarningNotFound();
 		}
     }
-
 
     public static void LogWarningNotFound(){
 		Debug.LogWarning ("There is no MusicPlayer in Scene, so load SplashScreen first.");

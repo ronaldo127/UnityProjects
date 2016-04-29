@@ -1,10 +1,8 @@
 #TODO
 
-Pause
-
 Level Select
 
-Restart from last
+Add checkpoints
 
 Borda no menu
 
