@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(Slider))]
-public class GameTimer : MonoBehaviour {
+public class WinCondition : MonoBehaviour {
 
 	public int secondsToSurvive = 100;
 	public AudioClip winSound;

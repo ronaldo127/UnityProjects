@@ -17,15 +17,21 @@ public class LoseCondition : Shredder {
 	
 	}
 
+	//Override Shredder method
 	new public void OnTriggerEnter2D (Collider2D collider)
 	{
 		if (canLose) {
 			if (collider.GetComponent<Attacker> ())
 				enemiesCanPass--;
 			if (enemiesCanPass <= 0) {
-				levelManager.LoadLoseScene ();
+				Lose();
 			}
 		}
 		base.OnTriggerEnter2D(collider);
+	}
+
+	private void Lose(){
+		PlayerPrefsManager.SetLostLevel(levelManager.GetCurrentLevel());
+		levelManager.LoadLoseScene();
 	}
 }

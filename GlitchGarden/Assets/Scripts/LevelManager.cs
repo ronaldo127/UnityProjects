@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour {
 
 	public float autoLoadNextLevelAfter;
 
+	public int scenesBeforeLevels = 2;
+
 	void Start () {
         if (autoLoadNextLevelAfter>0)
 		    Invoke ("LoadNextLevel", autoLoadNextLevelAfter);
@@ -31,5 +33,19 @@ public class LevelManager : MonoBehaviour {
 
 	public void LoadLoseScene(){
 		LoadLevel("03b Lose");
+	}
+
+	public int GetCurrentLevel(){
+		Scene scene = SceneManager.GetActiveScene();
+		if (scene.name.Contains("Level"))
+			return SceneManager.GetActiveScene().buildIndex - scenesBeforeLevels+1;
+		else
+			return -1;
+	}
+
+	public void LoadLostLevel ()
+	{
+		int levelToLoad = scenesBeforeLevels-1+PlayerPrefsManager.GetLostLevel();
+		SceneManager.LoadScene(levelToLoad);
 	}
 }

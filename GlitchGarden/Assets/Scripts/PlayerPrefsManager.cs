@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 public class PlayerPrefsManager : MonoBehaviour {
 
     const string MASTER_VOLUME_KEY = "MASTER_VOLUME";
-    const string DIFFICULTY_KEY = "DIFFICULTY";
-    const string LEVEL_KEY = "LEVEL_UNLOCKED_";
+	const string DIFFICULTY_KEY = "DIFFICULTY";
+	const string LEVEL_KEY = "LEVEL_UNLOCKED_";
+    const string LOST_LEVEL_KEY = "LOST_LEVEL";
 
     public static void SetMasterVolume(float volume)
     {
@@ -78,4 +79,15 @@ public class PlayerPrefsManager : MonoBehaviour {
         return 2f;
     }
 
+    public static void SetLostLevel (int level)
+	{
+		PlayerPrefs.SetInt(LOST_LEVEL_KEY, level);
+	}
+    public static int GetLostLevel ()
+	{
+		if (PlayerPrefs.HasKey(LOST_LEVEL_KEY))
+			return PlayerPrefs.GetInt(LOST_LEVEL_KEY);
+		else
+			return 1;
+	}
 }
