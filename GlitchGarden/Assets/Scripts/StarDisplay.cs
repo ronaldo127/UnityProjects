@@ -8,11 +8,13 @@ public class StarDisplay : MonoBehaviour {
 
 	public int stars = 100;
 	private Text text;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		text = GetComponent<Text>();
 		UpdateText ();
+		animator = GetComponent<Animator>();
 	}
 
 	public void UpdateText ()
@@ -29,6 +31,7 @@ public class StarDisplay : MonoBehaviour {
 	public bool UseStars (int amount)
 	{
 		if (stars < amount) {
+			animator.SetTrigger("Blink");
 			return false;
 		}
 		stars-=amount;

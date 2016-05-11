@@ -4,8 +4,6 @@ This is a tower defense game that is mostly based on glitch the game artwork. I 
 
 #TODO
 
-Piscar carteira
-
 Animação crescendo preço quando não puder pagar
 
 Adicionar uma animação na splash screen
