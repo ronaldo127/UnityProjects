@@ -6,8 +6,13 @@ public class Pause : MonoBehaviour {
 
 	public Sprite stopImage;
 	public Sprite resumeImage;
+	public bool IsPaused {
+		get{ 
+			return isPaused;
+		}
+	}
 
-
+	private AdsManager adsManager;
 	private Image image;
 	private bool isPaused = false;
 
@@ -15,6 +20,7 @@ public class Pause : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		image = GetComponent<Image>();
+		adsManager = GameObject.FindObjectOfType<AdsManager>();
 	}
 
 
@@ -22,13 +28,24 @@ public class Pause : MonoBehaviour {
 	{
 		isPaused = !isPaused;
 		if (isPaused) {
-			image.sprite = resumeImage;
-			Time.timeScale = 0.0f;
-			MusicPlayer.Pause();
+			PauseAction();
 		} else {
-			image.sprite = stopImage;
-			Time.timeScale = 1.0f;
-			MusicPlayer.Resume();
+			ResumeAction();
 		}
+	}
+
+	private void PauseAction()
+	{
+		image.sprite = resumeImage;
+		Time.timeScale = 0.0f;
+		MusicPlayer.Pause();
+		if (adsManager!=null) adsManager.RequestBanner();
+	}
+	private void ResumeAction()
+	{
+		if (adsManager!=null) adsManager.DestroyBanner();
+		image.sprite = stopImage;
+		Time.timeScale = 1.0f;
+		MusicPlayer.Resume();
 	}
 }

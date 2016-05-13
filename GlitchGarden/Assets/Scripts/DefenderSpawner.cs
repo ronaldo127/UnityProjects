@@ -8,6 +8,7 @@ public class DefenderSpawner : MonoBehaviour {
 
 	private GameObject defenders;
 	private StarDisplay starDisplay;
+	private Pause pause;
 
 	// Use this for initialization
 	void Start () {
@@ -15,11 +16,12 @@ public class DefenderSpawner : MonoBehaviour {
 		if (defenders==null)
 			defenders = new GameObject("Defenders");
 		starDisplay = GameObject.FindObjectOfType<StarDisplay>();
+		pause = GameObject.FindObjectOfType<Pause>();
 	}
 
 	void OnMouseDown ()
 	{
-		if (SpawnButton.GetCurrentSelected ()) {
+		if (SpawnButton.GetCurrentSelected () && !pause.IsPaused) {
 			int cost = SpawnButton.GetCurrentSelected ().GetComponent<Defender> ().cost;
 			Vector3 dest = GetMouseClickInGrid ();
 			if (CanAttach (dest)) {

@@ -4,7 +4,7 @@ This is a tower defense game that is mostly based on glitch the game artwork. I 
 
 #TODO
 
-Animação crescendo preço quando não puder pagar
+Animação crescendo preço quando não puder pagar Do I need it?
 
 Adicionar uma animação na splash screen
 
@@ -13,8 +13,6 @@ Unlock levels system
 Internationalization
 
 Analytics
-
-Adsense
 
 Fazer tutorial do jogo
 
@@ -25,4 +23,8 @@ UX: E os números no GUI superior durante o jogo ficam ilegíveis nesse aparelho.
 Novos levels
 
 Adicionar caranguejo dançando na borda
+
+Otario and rock bug.
+
+Reuse more flow buttons
 

@@ -33,6 +33,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &120824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 460138}
+  - 114: {fileID: 11434436}
+  m_Layer: 0
+  m_Name: AdsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &123184
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +287,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 22484580}
   m_RootOrder: 8
+--- !u!4 &460138
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22484580}
+  m_RootOrder: 9
 --- !u!61 &6178802
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -537,6 +565,17 @@ MonoBehaviour:
   secondsToSurvive: 90
   winSound: {fileID: 8300000, guid: 8a0fda8aff6d24fbea3bf3e1a5929f6c, type: 3}
   levelManager: {fileID: 11400000, guid: ed65dde16a38c42a79b8011ae4ed0bbb, type: 2}
+--- !u!114 &11434436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe70eb8047944743b7d8dc1fd3ca56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11437218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1126,6 +1165,7 @@ RectTransform:
   - {fileID: 22428464}
   - {fileID: 22484476}
   - {fileID: 458690}
+  - {fileID: 460138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
