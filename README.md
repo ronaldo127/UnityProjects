@@ -9,8 +9,8 @@ https://github.com/ronaldo127/UnityProjects/tree/master/BlockBreaker
 
 This is an Arkanoid like game. I have used particles, some vector math and 2D physics
 
-###GlitchGarden
-https://github.com/ronaldo127/UnityProjects/tree/master/GlitchGarden
+###Glitch Tower Defense
+https://github.com/ronaldo127/Glitch-Tower-Defense
 
 This is a Plants vs Zombies like gameplay. I have use lots of animations, which are based on sprites and 2D skeletal animation, iteration on play-testing and UI system for multi-screen resolution.
 
