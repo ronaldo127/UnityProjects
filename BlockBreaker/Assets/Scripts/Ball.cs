@@ -4,6 +4,8 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 
 	public float angularPaddleFactor = 1f;
+	[Range(0.0f, 45.0f)]
+	public float openAngle = 45.0f;
 
 	private Paddle paddle;
 
@@ -42,6 +44,13 @@ public class Ball : MonoBehaviour {
 				Vector2 oldV = this.rb.velocity;
 				float size = oldV.magnitude;
 				Vector2 newV = (oldV+tweak).normalized*size;
+				float angleDeg = (Mathf.Atan2(newV.y, newV.x) * Mathf.Rad2Deg + 360.0f) % 360.0f;
+				float minAng = 180.0f + openAngle;
+				float maxAng = 360.0f - openAngle;
+				if ( angleDeg < minAng || angleDeg > maxAng ){
+					float tanValue = Mathf.Tan(Mathf.Clamp(angleDeg, minAng, maxAng)*Mathf.Deg2Rad);
+					newV = new Vector2 (-tanValue, 1).normalized*size;
+				}
 				this.rb.velocity = newV;
 			}
 		}
