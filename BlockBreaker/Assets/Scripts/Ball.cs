@@ -40,6 +40,22 @@ public class Ball : MonoBehaviour {
 		if (hasStarted) {
 			audioClip.Play ();
 			if (collision.gameObject.name == "Paddle") {
+
+				Vector2 temp = this.rb.velocity;
+				float magnitude = temp.magnitude;
+
+				Vector3 projectionOnX = Vector3.Project (transform.position - collision.transform.position, Vector3.right);
+				float distanceFromPaddleCenter = projectionOnX.x;
+				float maxDistanceToEdge = collision.transform.lossyScale.x/2;
+				float p = distanceFromPaddleCenter/maxDistanceToEdge;
+				temp = new Vector2 (temp.x, temp.y);
+				Quaternion q = Quaternion.Euler (0,0,angularPaddleFactor * p);
+				p = Mathf.Abs (p);
+				temp = (q * temp).normalized*magnitude/*(1+p)*/;
+
+
+
+				/*
 				Vector2 tweak = new Vector2 ((this.transform.position.x-paddle.transform.position.x)*angularPaddleFactor, 0f);
 				Vector2 oldV = this.rb.velocity;
 				float size = oldV.magnitude;
@@ -50,8 +66,9 @@ public class Ball : MonoBehaviour {
 				if ( angleDeg < minAng || angleDeg > maxAng ){
 					float tanValue = Mathf.Tan(Mathf.Clamp(angleDeg, minAng, maxAng)*Mathf.Deg2Rad);
 					newV = new Vector2 (-tanValue, 1).normalized*size;
-				}
-				this.rb.velocity = newV;
+				}*/
+
+				this.rb.velocity = temp;
 			}
 		}
 	}
