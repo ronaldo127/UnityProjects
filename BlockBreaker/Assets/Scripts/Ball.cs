@@ -51,7 +51,7 @@ public class Ball : MonoBehaviour {
 				temp = new Vector2 (temp.x, temp.y);
 				Quaternion q = Quaternion.Euler (0,0,angularPaddleFactor * p);
 				p = Mathf.Abs (p);
-				temp = (q * temp).normalized*magnitude/*(1+p)*/;
+				temp = (q * temp).normalized*magnitude/*(1+p)*/ + .1f*Vector3.up;
 
 
 
